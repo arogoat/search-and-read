@@ -24,5 +24,5 @@ No frameworks, no backend — just pure JS, HTML & CSS magic for geolocation ent
 - OpenStreetMap + Nominatim for map tiles and geolocation data
 
 ## 👨‍💻 Author  
-Made with precision & passion by **Arogoat**
+Made with precision & passion by **Arogoat** <br>
 📧 Email: zenekorgin@gmail.com
