@@ -11,9 +11,9 @@
 <body>
 
 <div id="controls">
-    <label>Współrzędne (lat,lng):</label>
+    <label>Coordinates (lat,lng):</label>
     <input type="text" id="coordsInput" placeholder="50.0614,19.9363" />
-    <button onclick="goToCoords()" id="Search">Szukaj</button>
+    <button onclick="goToCoords()" id="Search">Search</button>
     <span id="clickedCoords"></span>
 </div>
 
@@ -60,28 +60,28 @@
         const lng = e.lngLat.lng.toFixed(5);
         const lat = e.lngLat.lat.toFixed(5);
 
-        document.getElementById("clickedCoords").textContent = `Kliknięto: ${lat}, ${lng}`;
+        document.getElementById("clickedCoords").textContent = `Clicked: ${lat}, ${lng}`;
 
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
             .then(res => res.json())
             .then(data => {
-                const label = data.display_name || "Brak informacji o adresie";
+                const label = data.display_name || "No address information";
                 setMarkerAndPopup(lat, lng, label);
             })
-            .catch(() => setMarkerAndPopup(lat, lng, "Brak informacji"));
+            .catch(() => setMarkerAndPopup(lat, lng, "No information available"));
     });
 
     function goToCoords() {
         const input = document.getElementById("coordsInput").value.trim();
         const parts = input.split(",");
         if (parts.length !== 2) {
-            alert("Wprowadź współrzędne w formacie: lat,lng");
+            alert("Enter coordinates in the format: lat,lng");
             return;
         }
         const lat = parseFloat(parts[0]);
         const lng = parseFloat(parts[1]);
         if (isNaN(lat) || isNaN(lng)) {
-            alert("Nieprawidłowe współrzędne!");
+            alert("Incorrect coordinates!");
             return;
         }
 
@@ -90,13 +90,13 @@
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
             .then(res => res.json())
             .then(data => {
-                const label = data.display_name || "Brak informacji o adresie";
+                const label = data.display_name || "No address information";
                 setMarkerAndPopup(lat, lng, label);
-                document.getElementById("clickedCoords").textContent = `Szukano: ${lat}, ${lng}`;
+                document.getElementById("clickedCoords").textContent = `Searched: ${lat}, ${lng}`;
             })
             .catch(() => {
-                setMarkerAndPopup(lat, lng, "Brak informacji");
-                document.getElementById("clickedCoords").textContent = `Szukano: ${lat}, ${lng}`;
+                setMarkerAndPopup(lat, lng, "No information available");
+                document.getElementById("clickedCoords").textContent = `Searched: ${lat}, ${lng}`;
             });
     }
 </script>
