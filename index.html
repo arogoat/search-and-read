@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I love u TOSIA</title>
+    <link rel="shortcut icon" href="grafika.gif" type="image/x-icon">
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <section id="kk">
+        <h3>Czy masz na imie Tosia?</h3>
+        <div class="button-container">
+            <button  onclick="tak1()">TAK</button>
+            <button  class="nie" onclick="nie()">NIE</button>
+        </div>
+    </section>
+    <section id="kk1">
+        <h3>Czy twoje drugie imie to Józefina?</h3>
+        <div class="button-container">
+            <button  onclick="tak2()">TAK</button>
+            <button  class="nie" onclick="nie()">NIE</button>
+        </div>
+    </section>
+    <section id="kk2">
+        <h3 class="duzo">W który miesiąc obchodzisz rocznice związku ze swoją przyszłą walentynka?</h3>
+        <div class="button-container">
+            <button  onclick="tak3()">MARZEC</button>
+            <button  class="nie" onclick="nie()">PAŹDZIERNIK</button>
+        </div>
+    </section>
+    <section id="kk3">
+        <h3>Czy urodziłaś się 18 grudnia 2003 roku?</h3>
+        <div class="button-container">
+            <button   onclick="nie()">TAK</button>
+            <button  class="nie" onclick="tak4()">NIE</button>
+        </div>
+    </section>
+
+    <section id="zmw">
+        <h3 class="duzo">Cześć, Tosia! Teraz gdy jesteśmy juz tylko we dwoje...</h3>
+    </section>
+
+    <section id="zz">
+        <h3 class="duzo">Wybacz, ale najwidoczniej ta walentynka nie jest dla ciebie. Szukaj dalej...</h3>
+        <img src="sad.jpg" alt="crying" id="zdjeciesad">
+
+    </section>
+
+    <section id="zmw2">
+        <h3>Czy zostaniesz moją walentynką?❤️</h3>
+        <div class="button-container">
+            <button id="takwal" onclick="dalejtak()">TAK</button>
+            <button id="niewal" class="nie" onmouseenter="skok()">NIE</button>
+        </div>
+    </section>
+</body>
+</html>
+
+
+<script>
+    function tak1() {
+        document.getElementById("kk").style.display="none";
+        document.getElementById("kk1").style.display="flex";
+    }
+
+    function tak2() {
+        document.getElementById("kk1").style.display="none";
+        document.getElementById("kk2").style.display="flex";
+    }
+
+    function tak3() {
+        document.getElementById("kk2").style.display="none";
+        document.getElementById("kk3").style.display="flex";
+    }
+
+    function tak4() {
+        document.getElementById("kk3").style.display="none";
+        document.getElementById("zmw").style.display="flex";
+        document.getElementById("zmw2")
+
+        setTimeout(function() {
+            document.getElementById("kk3").style.display="none";
+            document.getElementById("zmw").style.display="none";
+            document.getElementById("zmw2").style.display="flex";
+    }, 3000);
+
+    }
+    function nie() {
+        document.getElementById("kk3").style.display="none";
+        document.getElementById("kk2").style.display="none";
+        document.getElementById("kk1").style.display="none";
+        document.getElementById("kk").style.display="none";
+        document.getElementById("zmw").style.display="none";
+
+        document.getElementById("zz").style.display="flex";
+
+        setTimeout(function() {
+        window.location.href = "https://tinder.com/pl";
+    }, 3000);
+}
+function dalejtak() {
+    document.getElementById("zmw2").style.display="none";
+}
+function skok() {
+    let b = document.getElementById("niewal");
+    let maxX = window.innerWidth - b.offsetWidth;  // Pobranie szerokości przycisku
+    let maxY = window.innerHeight - b.offsetHeight; // Pobranie wysokości przycisku
+
+    let newX = Math.random() * maxX;
+    let newY = Math.random() * maxY;
+
+    b.style.position = "absolute"; // Upewnienie się, że pozycja jest "absolute"
+    b.style.left = newX + "px";
+    b.style.top = newY + "px";
+}
+    
+function startLoveEffect() {
+    document.body.classList.add("white-background"); // Zmiana tła na białe
+    playMusic(); // Odtworzenie muzyki
+    setTimeout(showHeart, 1500); // Po 1.5 sek pojawia się serce
+    setTimeout(showMessage, 2500); // Po 2.5 sek pojawia się napis
+    setTimeout(startFallingText, 6000); // Po 6 sek tło zmienia się i zaczynają spadać napisy
+}
+
+// Event listener na przycisk "TAK"
+document.getElementById("takwal").addEventListener("click", startLoveEffect);
+
+// 🎶 FUNKCJA: Odtwarzanie muzyki
+function playMusic() {
+    let audio = document.createElement("audio");
+    audio.src = "love.mp3"; // Podmień na swoją piosenkę
+    audio.loop = true;
+    audio.autoplay = true;
+    document.body.appendChild(audio);
+}
+
+// ❤️ FUNKCJA: Pojawienie się dużego serca
+function showHeart() {
+    let heart = document.createElement("div");
+    heart.classList.add("background-heart");
+    heart.innerHTML = "❤️"; // Prawdziwe serce!
+    document.body.appendChild(heart);
+}
+
+// 📜 FUNKCJA: Pojawienie się napisu
+function showMessage() {
+    let message = document.createElement("div");
+    message.classList.add("big-message");
+    message.innerHTML = "❤️ Kocham Cię, Tosia! ❤️<br>Widzimy się 14 lutego!😘";
+    document.body.appendChild(message);
+}
+
+// 🌑 FUNKCJA: Zmiana tła na czarne + usunięcie serca i tekstu
+function startFallingText() {
+    document.body.classList.remove("white-background");
+    document.body.classList.add("black-background");
+
+    // Usunięcie serca i tekstu
+    document.querySelector(".background-heart")?.remove();
+    document.querySelector(".big-message")?.remove();
+
+    // Rozpoczęcie efektu spadających napisów
+    setInterval(createFallingText, 800);
+}
+
+// 🌧️ FUNKCJA: Spadające napisy
+function createFallingText() {
+    const phrases = [
+    "Kocham Cię ❤️", 
+    "Tosia 💕", 
+    "Jesteś cudowna! 💖", 
+    "Moja Walentynka 😘", 
+    "Na zawsze ❤️", 
+    "Jesteś moim serduszkiem 💓", 
+    "Mój skarb! 💎", 
+    "Nie mogę bez Ciebie 💘", 
+    "Jesteś wyjątkowa! ✨", 
+    "Moja księżniczka 👑", 
+    "Uwielbiam Twój uśmiech 😊", 
+    "Jesteś moim szczęściem 🍀", 
+    "Zawsze razem! 🔗", 
+    "Najlepsza dziewczyna na świecie! 💕", 
+    "Tylko Ty i ja ❤️", 
+    "Niebo bez Ciebie jest puste 🌙", 
+    "Jesteś moją miłością! 💝", 
+    "Dziękuję, że jesteś 😘", 
+    "Jesteś moim spełnionym marzeniem 🌠", 
+    "Tosia = Miłość 💞"
+];
+    
+    // Tworzymy losowy napis
+    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    
+    // Tworzymy nowy element span
+    const textElement = document.createElement("span");
+    textElement.classList.add("falling-text");
+    textElement.textContent = phrase;
+
+    // Losowa pozycja startowa
+    textElement.style.left = Math.random() * window.innerWidth + "px";
+    
+    // Ustawienie losowej prędkości animacji
+    const duration = Math.random() * 3 + 2; // od 2 do 5 sekund
+    textElement.style.animationDuration = duration + "s";
+
+    // Dodanie elementu do body
+    document.body.appendChild(textElement);
+
+    // Usunięcie elementu po zakończeniu animacji
+    setTimeout(() => {
+        textElement.remove();
+    }, duration * 1000);
+}
+
+let heartsActive = false; // Serduszka są domyślnie wyłączone
+
+document.addEventListener("mousemove", function(e) {
+    if (!heartsActive) return; // Jeśli serduszka nie są aktywne, nie twórz ich
+
+    let heart = document.createElement("img");
+    heart.src = "serce.png"; // Upewnij się, że nazwa pliku jest poprawna
+    heart.classList.add("cursor-heart");
+    heart.style.left = e.pageX + "px";
+    heart.style.top = e.pageY + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 1000); // Serduszka znikają po 1 sekundzie
+});
+
+// 🌑 FUNKCJA: Zmiana tła na czarne + uruchomienie serduszek za kursorem
+function startFallingText() {
+    document.body.classList.remove("white-background");
+    document.body.classList.add("black-background");
+
+    // Usunięcie serca i tekstu
+    document.querySelector(".background-heart")?.remove();
+    document.querySelector(".big-message")?.remove();
+
+    heartsActive = true; // Teraz serduszka są aktywne
+
+    // Rozpoczęcie efektu spadających napisów
+    setInterval(createFallingText, 800);
+}
+</script>
